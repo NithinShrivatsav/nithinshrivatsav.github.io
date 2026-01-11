@@ -4,5 +4,11 @@
     "description": "Self-supervised stereo matching with bilinear sampling and augmentation.",
     "image": "assets/stereo.gif",
     "page": "projects/stereo.html"
-  }
+  },
+  {
+  "title": "Decentralized Multi-Robot Control (Capture the Flag)",
+  "description": "Distributed protect and decoy strategies using cyclic pursuit, connectivity-preserving consensus, and reactive behaviors validated in Robotarium.",
+  "image": "assets/thumbnails/multi_robot.jpg",
+  "page": "projects/multi-robot.html"
+}
 ]
