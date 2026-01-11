@@ -1,56 +1,46 @@
+:root {
+  --bg: #f6f7fb;
+  --text: #111;
+  --card: #fff;
+}
+
+body.dark {
+  --bg: #0b1020;
+  --text: #e5e7eb;
+  --card: #111827;
+}
+
 body {
+  background: var(--bg);
+  color: var(--text);
   font-family: Arial, sans-serif;
   margin: 0;
-  background: #f7f7f7;
-  color: #222;
 }
 
 header {
-  background: #111827;
-  color: white;
-  padding: 40px;
+  padding: 30px;
   text-align: center;
 }
 
-.links a {
-  margin: 0 10px;
-  color: #93c5fd;
-  text-decoration: none;
-  font-weight: bold;
+button {
+  padding: 8px 12px;
+  cursor: pointer;
 }
 
 section {
   padding: 40px;
-  max-width: 1000px;
+  max-width: 1100px;
   margin: auto;
 }
 
-h2 {
-  border-bottom: 2px solid #ddd;
-  padding-bottom: 10px;
+.card {
+  background: var(--card);
+  padding: 20px;
+  border-radius: 10px;
+  margin-bottom: 20px;
 }
 
-.project {
-  background: white;
-  padding: 20px;
-  margin: 20px 0;
+.card img {
+  width: 100%;
   border-radius: 8px;
-  box-shadow: 0px 2px 5px rgba(0,0,0,0.1);
-}
-
-.project h3 {
-  margin-top: 0;
-}
-
-.project a {
-  margin-right: 15px;
-  text-decoration: none;
-  color: #2563eb;
-  font-weight: bold;
-}
-
-footer {
-  text-align: center;
-  padding: 20px;
-  color: #555;
 }
