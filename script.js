@@ -7,7 +7,7 @@ const projects = [
     demo: ""
   },
   {
-    title: "Autonomous Robot Navigation",
+    title: "Decentralized Multi-Robot Control",
     description: "ROS-based navigation stack with LiDAR mapping and obstacle avoidance.",
     tags: ["Robotics", "ROS", "SLAM"],
     github: "https://github.com/YOUR_REPO",
