@@ -1,37 +1,241 @@
 <!DOCTYPE html>
 <html>
 <head>
-  <title>Decentralized Multi-Robot Control</title>
+  <title>Decentralized Multi-Robot Control | Nithin Shrivatsav</title>
   <link rel="stylesheet" href="../style.css">
+
+  <style>
+    .carousel {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 15px;
+      margin: 20px 0;
+    }
+
+    .carousel img {
+      width: 85%;
+      border-radius: 12px;
+    }
+
+    .carousel button {
+      font-size: 24px;
+      padding: 10px 14px;
+      cursor: pointer;
+    }
+
+    pre {
+      background: #111827;
+      color: #e5e7eb;
+      padding: 15px;
+      overflow-x: auto;
+      border-radius: 8px;
+    }
+  </style>
 </head>
+
 <body>
 
 <section>
-<h1>Decentralized Multi-Robot Control (Capture-the-Flag)</h1>
+<h1>Decentralized Multi-Robot Control for Capture the Flag</h1>
 
-<!-- YouTube Video -->
-<h2>🎥 Demo</h2>
+<p>
+This project implements decentralized coordination strategies for a team of
+mobile robots playing a Capture-the-Flag game. Robots exhibit emergent behaviors
+including perimeter defense, decoying, pursuit, and tagging using only local
+sensing and distributed control protocols. The system was validated in the
+Robotarium multi-robot testbed.
+</p>
+
+<p>
+<b>GitHub:</b>
+<a href="https://github.com/NithinShrivatsav/Multi-Robot-Coordination/tree/master/capture_the_flag" target="_blank">
+Multi-Robot Coordination Repository
+</a>
+</p>
+
+<hr/>
+
+<h2>🎥 System Demonstration</h2>
+
 <iframe width="100%" height="420"
   src="https://www.youtube.com/embed/ZAj0yj7iQ5Q"
   frameborder="0"
-  allowfullscreen></iframe>
+  allowfullscreen>
+</iframe>
 
-<!-- Carousel -->
-<!-- Insert carousel HTML above -->
+<hr/>
 
-<h2>Theoretical Overview</h2>
+<h2>🧠 System Architecture</h2>
 
-<!-- Paste theory content blocks here -->
-
-<!-- Arch + block -->
-<h2>Architecture</h2>
 <pre>
-[Insert ASCII architecture diagram here]
+ ┌──────────────────────────┐
+ │     Global Game Logic    │
+ │  (FSM Switching, Scoring)│
+ └─────────────┬────────────┘
+               │
+     ┌─────────┴─────────┐
+     │                   │
+┌────v─────┐       ┌─────v─────┐
+│ Defenders│       │ Attackers │
+│  Module  │       │  Module   │
+└────┬─────┘       └─────┬─────┘
+     │                   │
+ ┌───v────────┐    ┌─────v────────┐
+ │ Cyclic      │    │ Go-to-Goal   │
+ │ Pursuit     │    │ Obstacle     │
+ │ Tagging      │    │ Avoidance    │
+ │ Consensus    │    │ Decoy Logic  │
+ └───┬────────┘    └─────┬────────┘
+     │                   │
+     └─────────┬─────────┘
+               │
+        ┌──────v──────┐
+        │ Local Sensing│
+        │ Δ-disk Graph │
+        └──────┬──────┘
+               │
+        ┌──────v──────┐
+        │ Robot Motion │
+        │ Unicycle Dyn │
+        └─────────────┘
 </pre>
 
-<h2>Gallery</h2>
-<!-- Carousel here -->
+<p>
+Each robot operates using local sensing within a delta-disk neighborhood.
+Controllers are decentralized, and behavior switching is coordinated via
+finite-state logic.
+</p>
+
+<hr/>
+
+<h2>📘 Algorithmic Breakdown</h2>
+
+<h3>1️⃣ Cyclic Pursuit Perimeter Defense</h3>
+
+<p>
+Defender robots form a rotating barrier around the flag using cyclic pursuit.
+Each robot tracks only its neighbor and updates its velocity vector accordingly.
+This creates a stable circular formation without centralized coordination.
+</p>
+
+<pre>
+ Neighbor Pose  →  Relative Vector  →  Rotation Transform
+        ↓
+ Velocity Command → Robot Actuation
+</pre>
+
+<p>
+This behavior maintains spacing, connectivity, and adaptability as agents enter
+or leave the formation.
+</p>
+
+---
+
+<h3>2️⃣ Connectivity-Preserving Consensus for Tagging</h3>
+
+<p>
+When attackers approach, a subset of defenders switches into tagging mode using
+consensus control. Robots maintain network connectivity while collectively
+moving toward intruders.
+</p>
+
+<pre>
+ Neighbor States → Consensus Filter → Weighted Velocity → Motion
+</pre>
+
+<p>
+The connectivity constraint prevents communication graph fragmentation while
+maintaining responsiveness.
+</p>
+
+---
+
+<h3>3️⃣ Reactive Decoy Strategy</h3>
+
+<p>
+A decoy robot intentionally attracts defenders away from the protected zone by
+maintaining interaction distance while drifting away from the flag. This blended
+control produces deceptive motion that appears locally aggressive but globally
+strategic.
+</p>
+
+<pre>
+ Distance Regulation + Goal Drift → Weighted Blend → Motion
+</pre>
+
+---
+
+<h3>4️⃣ Hybrid Behavior Switching (FSM)</h3>
+
+<p>
+Robots transition between behaviors based on proximity triggers and sensing
+conditions using a finite-state machine.
+</p>
+
+<pre>
+ Sense Event → FSM State → Controller Selection → Motion
+</pre>
+
+<hr/>
+
+<h2>🖼️ Visual Gallery</h2>
+
+<div class="carousel">
+  <button onclick="prev()">‹</button>
+  <img id="carouselImage" src="../assets/multi_robot/formation.png">
+  <button onclick="next()">›</button>
+</div>
+
+<p style="text-align:center;">
+  Use arrows to browse simulation and experiment visuals.
+</p>
+
+<hr/>
+
+<h2>📈 Key Outcomes</h2>
+
+<ul>
+  <li>Demonstrated decentralized defense using cyclic pursuit.</li>
+  <li>Validated emergent coordination in Robotarium.</li>
+  <li>Effective decoy strategy enabling multi-agent penetration.</li>
+  <li>Robust behavior switching without centralized planning.</li>
+</ul>
+
+<hr/>
+
+<p>
+<a href="../index.html">← Back to Portfolio</a>
+</p>
+
 </section>
+
+<script>
+const images = [
+  "formation.png",
+  "cyclic_pursuit.gif",
+  "decoy.gif",
+  "tagging.gif",
+  "arena_overview.png"
+];
+
+let index = 0;
+
+function updateImage() {
+  document.getElementById("carouselImage").src =
+    `../assets/multi_robot/${images[index]}`;
+}
+
+function next() {
+  index = (index + 1) % images.length;
+  updateImage();
+}
+
+function prev() {
+  index = (index - 1 + images.length) % images.length;
+  updateImage();
+}
+</script>
 
 </body>
 </html>
