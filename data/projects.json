@@ -4,11 +4,5 @@
     "description": "Self-supervised stereo matching with bilinear sampling and augmentation.",
     "image": "assets/stereo.gif",
     "page": "projects/stereo.html"
-  },
-  {
-    "title": "Indoor SLAM Robot",
-    "description": "Real-time mapping and navigation using LiDAR and RGB-D.",
-    "image": "assets/robot.jpg",
-    "page": "projects/slam.html"
   }
 ]
