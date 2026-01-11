@@ -1,33 +1,60 @@
-const projects = [
-  {
-    title: "Stereo Depth Estimation Pipeline",
-    description: "Implemented disparity estimation with bilinear sampling and data augmentation for stereo images.",
-    tags: ["Computer Vision", "Stereo", "PyTorch"],
-    github: "https://github.com/YOUR_REPO",
-    demo: ""
-  },
-  {
-    title: "Decentralized Multi-Robot Control",
-    description: "ROS-based navigation stack with LiDAR mapping and obstacle avoidance.",
-    tags: ["Robotics", "ROS", "SLAM"],
-    github: "https://github.com/YOUR_REPO",
-    demo: ""
-  }
-];
+const toggle = document.getElementById("themeToggle");
+toggle.onclick = () => document.body.classList.toggle("dark");
 
-const container = document.getElementById("projects");
+// Load JSON helper
+async function loadJSON(path) {
+  const res = await fetch(path);
+  return await res.json();
+}
 
-projects.forEach(p => {
-  const div = document.createElement("div");
-  div.className = "project";
+// Projects
+loadJSON("data/projects.json").then(projects => {
+  const container = document.getElementById("projects");
 
-  div.innerHTML = `
-    <h3>${p.title}</h3>
-    <p>${p.description}</p>
-    <p><b>Tags:</b> ${p.tags.join(", ")}</p>
-    ${p.github ? `<a href="${p.github}" target="_blank">GitHub</a>` : ""}
-    ${p.demo ? `<a href="${p.demo}" target="_blank">Demo</a>` : ""}
-  `;
+  projects.forEach(p => {
+    const div = document.createElement("div");
+    div.className = "card";
 
-  container.appendChild(div);
+    div.innerHTML = `
+      <h3>${p.title}</h3>
+      <img src="${p.image}">
+      <p>${p.description}</p>
+      <a href="${p.page}">Read More →</a>
+    `;
+    container.appendChild(div);
+  });
+});
+
+// Publications
+loadJSON("data/publications.json").then(pubs => {
+  const container = document.getElementById("publications");
+
+  pubs.forEach(p => {
+    const div = document.createElement("div");
+    div.className = "card";
+
+    div.innerHTML = `
+      <b>${p.title}</b><br/>
+      ${p.authors}<br/>
+      <i>${p.venue}</i> (${p.year})<br/>
+      <a href="${p.link}" target="_blank">Paper</a>
+    `;
+    container.appendChild(div);
+  });
+});
+
+// Blog
+loadJSON("data/blog.json").then(posts => {
+  const container = document.getElementById("blog");
+
+  posts.forEach(p => {
+    const div = document.createElement("div");
+    div.className = "card";
+    div.innerHTML = `
+      <h3>${p.title}</h3>
+      <p>${p.summary}</p>
+      <a href="${p.page}">Read →</a>
+    `;
+    container.appendChild(div);
+  });
 });
